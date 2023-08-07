@@ -17,10 +17,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 //   return application.sources(DemoApplication.class);
 //}
 
-
-// to execute code after application has started running
-// CommandLineRunner
-
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 	
