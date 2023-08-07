@@ -1,13 +1,10 @@
-package com.example.demo.services;
+package com.example.demo.topic;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.DAOs.TopicRepository;
-import com.example.demo.models.Topic;
 
 @Service
 public class TopicService {

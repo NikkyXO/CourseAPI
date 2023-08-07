@@ -1,8 +1,8 @@
-package com.example.demo.DTO;
+package com.example.demo.authentication;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.example.demo.models.User;
+import com.example.demo.user.User;
 
 import lombok.Data;
 

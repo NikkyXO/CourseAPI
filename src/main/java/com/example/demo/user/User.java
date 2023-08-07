@@ -1,6 +1,8 @@
-package com.example.demo.models;
+package com.example.demo.user;
 
 import java.util.Set;
+
+import com.example.demo.role.Role;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

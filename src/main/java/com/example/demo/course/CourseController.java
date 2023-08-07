@@ -1,4 +1,4 @@
-package com.example.demo.controllers;
+package com.example.demo.course;
 
 import java.util.List;
 
@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.models.Course;
-import com.example.demo.services.CourseService;
-import com.example.demo.models.Topic;
-import com.example.demo.services.TopicService;
+import com.example.demo.topic.Topic;
+import com.example.demo.topic.TopicService;
 
 @RestController
 public class CourseController {

@@ -1,8 +1,6 @@
-package com.example.demo.DAOs;
+package com.example.demo.topic;
 
 import org.springframework.data.repository.CrudRepository;
-
-import com.example.demo.models.Topic;
 
 public interface TopicRepository extends CrudRepository<Topic, String> {
 	

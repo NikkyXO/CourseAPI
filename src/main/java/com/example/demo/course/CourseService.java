@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.DAOs.CourseRepository;
-import com.example.demo.DAOs.TopicRepository;
-import com.example.demo.models.Course;
+import com.example.demo.topic.TopicRepository;
 
 @Service
 public class CourseService {

@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.authentication;
 
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,9 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.DAOs.UserRepository;
-import com.example.demo.DTO.LoginDTO;
-import com.example.demo.security.JwtTokenProvider;
+import com.example.demo.user.UserRepository;
 
 
 @Service
