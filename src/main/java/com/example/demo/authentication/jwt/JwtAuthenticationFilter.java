@@ -1,9 +1,14 @@
-package com.example.demo.authentication;
+package com.example.demo.authentication.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.NoArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +21,16 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
+@NoArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+	@Autowired
     private JwtTokenProvider jwtTokenProvider;
-
+    
+    @Autowired
     private UserDetailsService userDetailsService;
+    
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
         this.jwtTokenProvider = jwtTokenProvider;
@@ -32,28 +42,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        // get JWT token from http request
-        String token = getTokenFromRequest(request);
-
-        // validate token
-        if(StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)){
-
-            // get username from token
-            String username = jwtTokenProvider.getUsername(token);
-
-            // load the user associated with token
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                userDetails,
-                null,
-                userDetails.getAuthorities()
-            );
-
-            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
+       try {
+	        String token = getTokenFromRequest(request);
+	
+	        // validate token
+	        if(token != null && jwtTokenProvider.validateToken(token)){
+	
+	            // get username from token
+	            String username = jwtTokenProvider.getUsername(token);
+	
+	            // load the user associated with token
+	            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+	
+	            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+	                userDetails,
+	                null,
+	                userDetails.getAuthorities());
+	
+	            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+	
+	            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+	        }
+        } catch (Exception e) {
+        	logger.error("Cannot set user autjentication: {}", e);
         }
 
         filterChain.doFilter(request, response);
