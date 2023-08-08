@@ -51,7 +51,7 @@ public class JwtTokenProvider {
         );
     }
 
-    // get username from Jwt token
+    
     public String getUsername(String token){
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key())
@@ -63,7 +63,7 @@ public class JwtTokenProvider {
         return username;
     }
 
-    // validate Jwt token
+    
     public boolean validateToken(String token){
         try{
             Jwts.parserBuilder()
@@ -71,6 +71,7 @@ public class JwtTokenProvider {
                     .build()
                     .parse(token);
             return true;
+  
         } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {

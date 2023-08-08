@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -32,6 +33,15 @@ public class SpringSecurityConfig {  // extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtAuthenticationEntryPoint unauthorizedHandler;
 	
+	public static final String[] PUBLIC_PATHS = {"/api/auth/**",
+	            "/v3/api-docs.yaml",
+	            "/v3/api-docs/**",
+	            "/swagger-ui/**",
+	            "/ui/**",
+	            "/docs/**",
+	            "/swagger-ui.html"
+	          };
+
 	@Bean
 	public JwtAuthenticationFilter authenticationJwtTokenFilter() {
 	    return new JwtAuthenticationFilter();
@@ -56,11 +66,12 @@ public class SpringSecurityConfig {  // extends WebSecurityConfigurerAdapter {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf.disable())
+        http
+        		.csrf(csrf -> csrf.disable())
         		.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler)) 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         		.authorizeHttpRequests((auth) -> {
-                      auth.requestMatchers("/api/auth/**", "/v3/api-docs","/api-docs", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                      auth.requestMatchers(PUBLIC_PATHS).permitAll()
                       .anyRequest().authenticated();
                 });
         

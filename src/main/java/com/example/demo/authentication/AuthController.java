@@ -32,6 +32,8 @@ import com.example.demo.role.RoleRepository;
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 
 
@@ -59,7 +61,8 @@ public class AuthController {
     JwtTokenProvider jwtProvider;
     
   
-
+    @Operation(summary = "Sign in", description = "Sign in User")
+    @SecurityRequirement(name = "bearerToken")
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -81,6 +84,8 @@ public class AuthController {
                              userDetails.getEmail(), 
                              roles));
       }
+    
+    
     
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
