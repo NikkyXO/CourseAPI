@@ -1,4 +1,4 @@
-package com.example.courseAPI.security.authentication;
+package com.example.courseAPI.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.courseAPI.security.authentication.AuthenticationRequest;
+import com.example.courseAPI.security.authentication.AuthenticationResponse;
+import com.example.courseAPI.security.authentication.RegisterRequest;
+import com.example.courseAPI.services.AuthenticationService;
 
 import java.io.IOException;
 

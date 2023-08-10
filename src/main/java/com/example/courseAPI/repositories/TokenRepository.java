@@ -1,4 +1,4 @@
-package com.example.courseAPI.security.authentication.jwt;
+package com.example.courseAPI.repositories;
 
 
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.Optional;
  
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import com.example.courseAPI.entities.Token;
 
 
 public interface TokenRepository extends JpaRepository<Token, Integer> {

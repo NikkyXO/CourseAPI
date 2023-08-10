@@ -1,4 +1,4 @@
-package com.example.courseAPI.course;
+package com.example.courseAPI.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.courseAPI.topic.TopicRepository;
+import com.example.courseAPI.entities.Course;
+import com.example.courseAPI.repositories.CourseRepository;
+import com.example.courseAPI.repositories.TopicRepository;
 
 @Service
 public class CourseService {

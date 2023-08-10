@@ -1,4 +1,4 @@
-package com.example.courseAPI.security.authentication;
+package com.example.courseAPI.services;
 
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
-import com.example.courseAPI.security.authentication.jwt.TokenRepository;
+import com.example.courseAPI.repositories.TokenRepository;
 
 
 

@@ -1,4 +1,4 @@
-package com.example.courseAPI.security.role;
+package com.example.courseAPI.entities;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

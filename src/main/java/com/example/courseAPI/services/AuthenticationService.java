@@ -1,11 +1,13 @@
-package com.example.courseAPI.security.authentication;
+package com.example.courseAPI.services;
 
-import com.example.courseAPI.config.JwtService;
-import com.example.courseAPI.security.authentication.jwt.Token;
-import com.example.courseAPI.security.authentication.jwt.TokenRepository;
+import com.example.courseAPI.entities.Token;
+import com.example.courseAPI.entities.User;
+import com.example.courseAPI.repositories.TokenRepository;
+import com.example.courseAPI.repositories.UserRepository;
+import com.example.courseAPI.security.authentication.AuthenticationRequest;
+import com.example.courseAPI.security.authentication.AuthenticationResponse;
+import com.example.courseAPI.security.authentication.RegisterRequest;
 import com.example.courseAPI.security.authentication.jwt.TokenType;
-import com.example.courseAPI.user.User;
-import com.example.courseAPI.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,27 +37,36 @@ public class AuthenticationService {
         .password(passwordEncoder.encode(request.getPassword()))
         .role(request.getRole())
         .build();
+    
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
+    
     saveUserToken(savedUser, jwtToken);
+    
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
             .refreshToken(refreshToken)
         .build();
   }
 
+
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
-    authenticationManager.authenticate(
+    
+	  authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             request.getEmail(),
             request.getPassword()
         )
     );
+    
     var user = repository.findByEmail(request.getEmail())
         .orElseThrow();
+    
+    
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
+    
     revokeAllUserTokens(user);
     saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
@@ -79,10 +90,12 @@ public class AuthenticationService {
     var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
     if (validUserTokens.isEmpty())
       return;
+    
     validUserTokens.forEach(token -> {
       token.setExpired(true);
       token.setRevoked(true);
     });
+    
     tokenRepository.saveAll(validUserTokens);
   }
 

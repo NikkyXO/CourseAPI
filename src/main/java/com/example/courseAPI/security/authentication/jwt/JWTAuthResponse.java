@@ -1,4 +1,4 @@
-package com.example.courseAPI.security.authentication;
+package com.example.courseAPI.security.authentication.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

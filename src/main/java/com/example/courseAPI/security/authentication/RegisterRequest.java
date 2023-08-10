@@ -1,6 +1,8 @@
 package com.example.courseAPI.security.authentication;
 
-import com.example.courseAPI.security.role.Role;
+
+
+import com.example.courseAPI.entities.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

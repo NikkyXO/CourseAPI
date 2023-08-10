@@ -1,30 +1,23 @@
-package com.example.courseAPI.topic;
+package com.example.courseAPI.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import com.example.courseAPI.course.Course;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-// @JsonIgnore
 
 @Entity
-@Table(name="topic")
-public class Topic {
+@Table(name="course")
+public class Course {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -32,15 +25,26 @@ public class Topic {
 	@Schema(hidden = true)
 	private Long id;
 	
+
 	private String name;
 	private String description;
 	
+	
+	
+//    @JoinColumn(name="topic_id", referencedColumnName = "id")
+//	@JsonIgnoreProperties("course")
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Schema(hidden = true)
+	private Topic topic;
+	
 
-	public Topic() {
+	public Course() {
 		
 	}
-
-	public Topic(String name, String description) {
+	
+	
+	public Course(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -67,19 +71,13 @@ public class Topic {
 		this.description = description;
 	}
 	
-//	public List<Course> getCourses() {
-//		return courses;
-//	}
-//	
-	public void addCourse(Course course) {
-//		courses.add(course);
-		course.setTopic(this);
+	public Topic getTopic() {
+		return topic;
 	}
-//	
-//	public void removeCourse(Course course) {
-//		courses.remove(course);
-//		course.setTopic(null);
-//	}
 
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+	
 
 }

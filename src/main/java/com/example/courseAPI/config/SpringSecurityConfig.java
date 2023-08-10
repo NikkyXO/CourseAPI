@@ -21,8 +21,10 @@ import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 
-import com.example.courseAPI.security.role.Permission;
-import com.example.courseAPI.security.role.Role;
+import com.example.courseAPI.entities.Permission;
+import com.example.courseAPI.entities.Role;
+import com.example.courseAPI.security.authentication.jwt.JwtAuthenticationFilter;
+
 
 @Configuration
 @EnableMethodSecurity

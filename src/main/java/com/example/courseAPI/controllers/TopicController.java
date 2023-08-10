@@ -1,4 +1,4 @@
-package com.example.courseAPI.topic;
+package com.example.courseAPI.controllers;
 
 import java.util.List;
 
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.courseAPI.course.CourseService;
+import com.example.courseAPI.entities.Topic;
+import com.example.courseAPI.services.CourseService;
+import com.example.courseAPI.services.TopicService;
 
 @RestController
 public class TopicController {

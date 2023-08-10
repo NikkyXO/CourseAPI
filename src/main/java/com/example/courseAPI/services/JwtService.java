@@ -1,4 +1,4 @@
-package com.example.courseAPI.config;
+package com.example.courseAPI.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

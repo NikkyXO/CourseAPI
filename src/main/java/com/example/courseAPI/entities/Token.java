@@ -1,6 +1,6 @@
-package com.example.courseAPI.security.authentication.jwt;
+package com.example.courseAPI.entities;
 
-import com.example.courseAPI.user.User;
+import com.example.courseAPI.security.authentication.jwt.TokenType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

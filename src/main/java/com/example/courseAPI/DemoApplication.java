@@ -4,10 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import com.example.courseAPI.security.authentication.AuthenticationService;
-import com.example.courseAPI.security.authentication.RegisterRequest;
-import com.example.courseAPI.security.role.Role;
+import com.example.courseAPI.services.AuthenticationService;
 
 
 @SpringBootApplication
